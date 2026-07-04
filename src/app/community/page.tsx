@@ -111,7 +111,7 @@ export default function Community() {
               <div>Points</div>
               <div>Wins</div>
             </div>
-            {posts.map((entry, idx) => (
+            {posts.map((entry) => (
               <div key={entry.id} className="grid grid-cols-4 gap-4 p-4 border-t border-cyan/20 hover:bg-white/5 transition">
                 <div className="font-bold">{entry.rank}</div>
                 <div>{entry.user?.name}</div>

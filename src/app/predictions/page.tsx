@@ -2,7 +2,7 @@
 
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useSession } from 'next-auth/react';
-import { Clock, TrendingUp, Star } from 'lucide-react';
+import { Clock, Star } from 'lucide-react';
 
 export default function PredictionsPage() {
   const { data: session } = useSession();

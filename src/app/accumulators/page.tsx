@@ -8,9 +8,9 @@ import { useSession } from 'next-auth/react';
 export default function AccumulatorsPage() {
   const { data: session } = useSession();
   
-  const [accumulators, setAccumulators] = useState<any[]>([]);
+  const [accumulators, setAccumulators] = useState<unknown[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selections, setSelections] = useState<any[]>([]);
+  const [selections, setSelections] = useState<unknown[]>([]);
   const [stake, setStake] = useState('');
   const [showForm, setShowForm] = useState(false);
 
@@ -30,10 +30,9 @@ export default function AccumulatorsPage() {
     }
   };
 
-  const calculateTotalOdds = () => {
-    return selections.reduce((acc, sel) => acc * sel.odds, 1);
-  };
-
+ const calculateTotalOdds = () => {
+  return selections.reduce((acc: number, sel: any) => acc * (sel.odds || 1), 1);
+};
   const calculatePotentialWin = () => {
     if (!stake) return 0;
     return parseFloat(stake) * calculateTotalOdds();
@@ -106,7 +105,7 @@ export default function AccumulatorsPage() {
               {selections.length > 0 && (
                 <div className="bg-white/5 rounded-2xl p-6 mb-6">
                   <h3 className="font-bold mb-4">Selected Matches</h3>
-                  {selections.map((sel, idx) => (
+                  {selections.map((sel: any, idx) => (
                     <div key={idx} className="flex justify-between items-center py-3 border-b border-gray-700 last:border-none">
                       <span>{sel.prediction} @ <span className="text-cyan">{sel.odds}</span></span>
                       <button

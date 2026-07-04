@@ -1,10 +1,12 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { signIn } from 'next-auth/react';
+
 
 export default function Login() {
   const router = useRouter();

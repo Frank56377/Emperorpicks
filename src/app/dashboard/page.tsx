@@ -57,9 +57,6 @@ export default function Dashboard() {
             <div>
               <h2 className="text-4xl font-bold">Welcome back, {session.user?.name}!</h2>
               <p className="text-gray-400 mt-2 text-lg">{session.user?.email}</p>
-              {session.user?.id && (
-                <p className="text-gray-500 text-sm mt-1">ID: {session.user.id}</p>
-              )}
             </div>
           </div>
         </div>

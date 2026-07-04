@@ -34,7 +34,7 @@
    - Set Application Mode: Production
 
 3. **Configure Application**
-   - Application Root: `/home/username/public_html/betgenie-web`
+   - Application Root: `/home/username/public_html/Emperor Picks-web`
    - Application URL: `yourdomain.com`
    - Application Startup File: `npm start`
    - Port: Will be assigned automatically
@@ -47,7 +47,7 @@ In cPanel, set environment variables:
 NEXTAUTH_SECRET=your-very-secure-random-string-min-32-chars
 NEXTAUTH_URL=https://yourdomain.com
 NEXT_PUBLIC_API_URL=https://yourdomain.com/api
-DATABASE_URL=postgresql://dbuser:password@localhost:5432/betgenie_web
+DATABASE_URL=postgresql://dbuser:password@localhost:5432/Emperor Picks_web
 NODE_ENV=production
 ```
 
@@ -62,7 +62,7 @@ NODE_ENV=production
 
 2. **Update DATABASE_URL**
    ```
-   postgresql://dbuser:password@localhost:5432/betgenie_web
+   postgresql://dbuser:password@localhost:5432/Emperor Picks_web
    ```
 
 ## Step 5: Deploy Code
@@ -72,7 +72,7 @@ NODE_ENV=production
 2. Create new repository
 3. Clone this repository:
    ```
-   https://github.com/Frank56377/BetgenieWeb.git
+   https://github.com/Frank56377/Emperor PicksWeb.git
    ```
 4. Pull changes to deploy
 
@@ -168,4 +168,4 @@ npm run db:seed
 
 ---
 
-**Your BetGenie Web Platform is now live!** 🚀
+**Your Emperor Picks Web Platform is now live!** 🚀

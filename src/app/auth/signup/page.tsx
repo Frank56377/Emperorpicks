@@ -63,7 +63,7 @@ export default function SignUp() {
         <div className="bg-white/5 backdrop-blur-xl border border-cyan/30 rounded-2xl p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan to-gold bg-clip-text text-transparent mb-2">
-              BetGenie
+              Emperor Picks
             </h1>
             <p className="text-gray-400">Create your account</p>
           </div>

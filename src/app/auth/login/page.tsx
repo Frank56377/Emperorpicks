@@ -55,7 +55,7 @@ export default function Login() {
     setLoading(true);
 
     const result = await signIn('credentials', {
-      email: "test@betgenie.com",
+      email: "test@Emperor Picks.com",
       password: "test123",
       redirect: false,        // Prevent auto-redirect so we can handle error
       callbackUrl: "/dashboard",
@@ -76,7 +76,7 @@ export default function Login() {
         <div className="bg-white/5 backdrop-blur-xl border border-cyan/30 rounded-2xl p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan to-gold bg-clip-text text-transparent mb-2">
-              BetGenie
+              Emperor Picks
             </h1>
             <p className="text-gray-400">Sign in to your account</p>
           </div>
@@ -94,7 +94,7 @@ export default function Login() {
             disabled={loading}
             className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl mb-6 transition disabled:opacity-50"
           >
-            🔧 Login with Test Account (test@betgenie.com / test123)
+            🔧 Login with Test Account (test@Emperor Picks.com / test123)
           </button>
 
           <div className="relative my-6">

@@ -1,8 +1,8 @@
-# BetGenie Web Platform
+# Emperor Picks Web Platform
 
 **AI-Powered Betting Prediction Platform - Web Version**
 
-🌐 Full-featured website for BetGenie betting predictions, accumulators, and community insights.
+🌐 Full-featured website for Emperor Picks betting predictions, accumulators, and community insights.
 
 ## 🎯 Features
 
@@ -29,7 +29,7 @@
 ## 📦 Project Structure
 
 ```
-BetgenieWeb/
+Emperor PicksWeb/
 ├── src/
 │   ├── app/
 │   │   ├── layout.tsx
@@ -64,8 +64,8 @@ BetgenieWeb/
 
 1. Clone the repository
 ```bash
-git clone https://github.com/Frank56377/BetgenieWeb.git
-cd BetgenieWeb
+git clone https://github.com/Frank56377/Emperor PicksWeb.git
+cd Emperor PicksWeb
 ```
 
 2. Install dependencies
@@ -136,8 +136,8 @@ MIT License - see LICENSE file for details
 
 ## 📞 Support
 
-For support, email support@betgenie.com or open an issue.
+For support, email support@Emperor Picks.com or open an issue.
 
 ---
 
-**Built with ❤️ for BetGenie**
+**Built with ❤️ for Emperor Picks**

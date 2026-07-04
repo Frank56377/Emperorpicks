@@ -1,7 +1,7 @@
 {
-  "name": "betgenie-web",
+  "name": "Emperor Picks-web",
   "version": "1.0.0",
-  "description": "BetGenie - Full-featured AI-Powered Bet Prediction Platform Website",
+  "description": "Emperor Picks - Full-featured AI-Powered Bet Prediction Platform Website",
   "private": true,
   "scripts": {
     "dev": "next dev",

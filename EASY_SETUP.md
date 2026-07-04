@@ -4,8 +4,8 @@
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/Frank56377/BetgenieWeb.git
-cd BetgenieWeb
+git clone https://github.com/Frank56377/Emperor PicksWeb.git
+cd Emperor PicksWeb
 ```
 
 ### 2. Install Dependencies
@@ -115,7 +115,7 @@ npm install
 - Restart terminal after installing
 
 ### "Cannot read file .env.local"
-- Make sure you're in the `BetgenieWeb` folder
+- Make sure you're in the `Emperor PicksWeb` folder
 - Check that `.env.local` file exists
 - Run: `ls -la` (Mac/Linux) or `dir` (Windows) to see files
 
@@ -140,7 +140,7 @@ This opens a browser interface to see all your data!
 
 ## 🎉 You're All Set!
 
-Your BetGenie app is running locally with **zero database setup needed**!
+Your Emperor Picks app is running locally with **zero database setup needed**!
 
 **Next Steps:**
 1. Test all pages

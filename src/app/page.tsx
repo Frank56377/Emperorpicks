@@ -5,7 +5,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white flex items-center justify-center">
       <div className="text-center px-6">
         <h1 className="text-7xl font-bold mb-6 tracking-tight">
-          Betgenie
+          Emperor Picks
         </h1>
         <p className="text-2xl mb-10 text-gray-300">
           Smart Football Predictions &amp; Accumulators

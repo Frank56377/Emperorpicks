@@ -1,12 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 
-export default function Login() {
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
@@ -49,7 +49,6 @@ export default function Login() {
     }
   };
 
-  // Test Account Login using NextAuth
   const handleTestLogin = async () => {
     setError('');
     setLoading(true);
@@ -57,7 +56,7 @@ export default function Login() {
     const result = await signIn('credentials', {
       email: "test@betgenie.com",
       password: "test123",
-      redirect: false,        // Prevent auto-redirect so we can handle error
+      redirect: false,
       callbackUrl: "/dashboard",
     });
 
@@ -87,7 +86,6 @@ export default function Login() {
             </div>
           )}
 
-          {/* Test Account Button */}
           <button
             type="button"
             onClick={handleTestLogin}
@@ -106,7 +104,6 @@ export default function Login() {
             </div>
           </div>
 
-          {/* Existing Email/Password Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="bg-red-500/20 border border-red-500 rounded-lg p-3 text-red-200 text-sm">
@@ -114,7 +111,6 @@ export default function Login() {
               </div>
             )}
 
-            {/* ... rest of your form (email, password, etc.) remains the same ... */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
@@ -154,7 +150,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Rest of your form (checkbox, button, etc.) */}
             <button
               type="submit"
               disabled={loading}
@@ -164,7 +159,6 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Google Button */}
           <button
             type="button"
             onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
@@ -185,5 +179,13 @@ export default function Login() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Login() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }

@@ -1,14 +1,12 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
 import { signIn } from 'next-auth/react';
 
-
-export default function Login() {
+function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
@@ -44,29 +42,28 @@ export default function Login() {
       }
 
       router.push('/dashboard');
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  // Test Account Login using NextAuth
   const handleTestLogin = async () => {
     setError('');
     setLoading(true);
 
     const result = await signIn('credentials', {
-      email: "test@Emperor Picks.com",
-      password: "test123",
-      redirect: false,        // Prevent auto-redirect so we can handle error
-      callbackUrl: "/dashboard",
+      email: 'test@emperorpicks.com',
+      password: 'test123',
+      redirect: false,
+      callbackUrl: '/dashboard',
     });
 
     setLoading(false);
 
     if (result?.error) {
-      setError("Test login failed. Please check your NextAuth configuration.");
+      setError('Test login failed. Please check your NextAuth configuration.');
     } else {
       router.push('/dashboard');
     }
@@ -89,26 +86,15 @@ export default function Login() {
             </div>
           )}
 
-          {/* Test Account Button */}
           <button
             type="button"
             onClick={handleTestLogin}
             disabled={loading}
             className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl mb-6 transition disabled:opacity-50"
           >
-            🔧 Login with Test Account (test@Emperor Picks.com / test123)
+            🔧 Login with Test Account (test@emperorpicks.com / test123)
           </button>
 
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-700"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-[#0A1428] text-gray-500">OR</span>
-            </div>
-          </div>
-
-          {/* Existing Email/Password Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="bg-red-500/20 border border-red-500 rounded-lg p-3 text-red-200 text-sm">
@@ -116,7 +102,6 @@ export default function Login() {
               </div>
             )}
 
-            {/* ... rest of your form (email, password, etc.) remains the same ... */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
@@ -156,7 +141,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Rest of your form (checkbox, button, etc.) */}
             <button
               type="submit"
               disabled={loading}
@@ -166,20 +150,22 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Google Button */}
           <button
             type="button"
             onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
             disabled={loading}
             className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-4 rounded-xl font-medium hover:bg-gray-100 transition mt-4 disabled:opacity-50"
           >
-            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" 
-                 alt="Google" className="h-5" />
+            <img
+              src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+              alt="Google"
+              className="h-5"
+            />
             Continue with Google
           </button>
 
           <p className="text-center text-gray-400 text-sm mt-6">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-cyan hover:text-gold transition">
               Sign Up
             </Link>
@@ -187,5 +173,13 @@ export default function Login() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white">Loading...</div>}>
+      <LoginContent />
+    </Suspense>
   );
 }

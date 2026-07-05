@@ -50,7 +50,7 @@ export default function SignUp() {
       }
 
       router.push('/auth/login?registered=true');
-    } catch (err) {
+    } catch {
       setError('An error occurred. Please try again.');
     } finally {
       setLoading(false);

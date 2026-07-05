@@ -1,6 +1,10 @@
 'use client';
 
+<<<<<<< HEAD
 import { Suspense, useState } from 'react';
+=======
+import { useState, Suspense } from 'react';
+>>>>>>> origin/main
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
@@ -54,10 +58,17 @@ function LoginContent() {
     setLoading(true);
 
     const result = await signIn('credentials', {
+<<<<<<< HEAD
       email: 'test@emperorpicks.com',
       password: 'test123',
       redirect: false,
       callbackUrl: '/dashboard',
+=======
+      email: "test@betgenie.com",
+      password: "test123",
+      redirect: false,
+      callbackUrl: "/dashboard",
+>>>>>>> origin/main
     });
 
     setLoading(false);
@@ -95,6 +106,18 @@ function LoginContent() {
             🔧 Login with Test Account (test@emperorpicks.com / test123)
           </button>
 
+<<<<<<< HEAD
+=======
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-700"></div>
+            </div>
+            <div className="relative flex justify-center text-sm">
+              <span className="px-4 bg-[#0A1428] text-gray-500">OR</span>
+            </div>
+          </div>
+
+>>>>>>> origin/main
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="bg-red-500/20 border border-red-500 rounded-lg p-3 text-red-200 text-sm">
@@ -176,9 +199,15 @@ function LoginContent() {
   );
 }
 
+<<<<<<< HEAD
 export default function LoginPage() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white">Loading...</div>}>
+=======
+export default function Login() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+>>>>>>> origin/main
       <LoginContent />
     </Suspense>
   );

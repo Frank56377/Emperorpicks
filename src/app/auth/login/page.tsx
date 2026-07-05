@@ -23,31 +23,26 @@ function LoginContent() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setLoading(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setError('');
+  setLoading(true);
 
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
+  const result = await signIn('credentials', {
+    email: formData.email,
+    password: formData.password,
+    redirect: false,
+    callbackUrl: '/dashboard',
+  });
 
-      if (!response.ok) {
-        const data = await response.json();
-        setError(data.error || 'Failed to login');
-        return;
-      }
+  setLoading(false);
 
-      router.push('/dashboard');
-    } catch {
-      setError('An error occurred. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (result?.error) {
+    setError('Invalid email or password');
+  } else {
+    router.push('/dashboard');
+  }
+};
 
   const handleTestLogin = async () => {
     setError('');

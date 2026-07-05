@@ -1,6 +1,10 @@
 'use client';
 
+<<<<<<< HEAD
+import { Suspense, useState } from 'react';
+=======
 import { useState, Suspense } from 'react';
+>>>>>>> origin/main
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff } from 'lucide-react';
@@ -54,16 +58,23 @@ function LoginContent() {
     setLoading(true);
 
     const result = await signIn('credentials', {
+<<<<<<< HEAD
+      email: 'test@emperorpicks.com',
+      password: 'test123',
+      redirect: false,
+      callbackUrl: '/dashboard',
+=======
       email: "test@betgenie.com",
       password: "test123",
       redirect: false,
       callbackUrl: "/dashboard",
+>>>>>>> origin/main
     });
 
     setLoading(false);
 
     if (result?.error) {
-      setError("Test login failed. Please check your NextAuth configuration.");
+      setError('Test login failed. Please check your NextAuth configuration.');
     } else {
       router.push('/dashboard');
     }
@@ -75,7 +86,7 @@ function LoginContent() {
         <div className="bg-white/5 backdrop-blur-xl border border-cyan/30 rounded-2xl p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan to-gold bg-clip-text text-transparent mb-2">
-              BetGenie
+              Emperor Picks
             </h1>
             <p className="text-gray-400">Sign in to your account</p>
           </div>
@@ -92,9 +103,11 @@ function LoginContent() {
             disabled={loading}
             className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl mb-6 transition disabled:opacity-50"
           >
-            🔧 Login with Test Account (test@betgenie.com / test123)
+            🔧 Login with Test Account (test@emperorpicks.com / test123)
           </button>
 
+<<<<<<< HEAD
+=======
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-700"></div>
@@ -104,6 +117,7 @@ function LoginContent() {
             </div>
           </div>
 
+>>>>>>> origin/main
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="bg-red-500/20 border border-red-500 rounded-lg p-3 text-red-200 text-sm">
@@ -165,13 +179,16 @@ function LoginContent() {
             disabled={loading}
             className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-4 rounded-xl font-medium hover:bg-gray-100 transition mt-4 disabled:opacity-50"
           >
-            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" 
-                 alt="Google" className="h-5" />
+            <img
+              src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+              alt="Google"
+              className="h-5"
+            />
             Continue with Google
           </button>
 
           <p className="text-center text-gray-400 text-sm mt-6">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-cyan hover:text-gold transition">
               Sign Up
             </Link>
@@ -182,9 +199,15 @@ function LoginContent() {
   );
 }
 
+<<<<<<< HEAD
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-white">Loading...</div>}>
+=======
 export default function Login() {
   return (
     <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+>>>>>>> origin/main
       <LoginContent />
     </Suspense>
   );

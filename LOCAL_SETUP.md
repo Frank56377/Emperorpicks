@@ -9,8 +9,8 @@
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/Frank56377/BetgenieWeb.git
-cd BetgenieWeb
+git clone https://github.com/Frank56377/Emperor PicksWeb.git
+cd Emperor PicksWeb
 ```
 
 ### 2. Install Dependencies
@@ -24,10 +24,10 @@ This installs all required packages from package.json.
 #### Option A: Using Docker (Easiest)
 ```bash
 # Pull and run PostgreSQL
-docker run --name betgenie-db \
-  -e POSTGRES_USER=betgenie \
-  -e POSTGRES_PASSWORD=betgenie123 \
-  -e POSTGRES_DB=betgenie_web \
+docker run --name Emperor Picks-db \
+  -e POSTGRES_USER=Emperor Picks \
+  -e POSTGRES_PASSWORD=Emperor Picks123 \
+  -e POSTGRES_DB=Emperor Picks_web \
   -p 5432:5432 \
   -d postgres:14
 ```
@@ -37,13 +37,13 @@ docker run --name betgenie-db \
 2. Open pgAdmin or psql terminal
 3. Create database:
 ```sql
-CREATE DATABASE betgenie_web;
-CREATE USER betgenie WITH PASSWORD 'betgenie123';
-ALTER ROLE betgenie SET client_encoding TO 'utf8';
-ALTER ROLE betgenie SET default_transaction_isolation TO 'read committed';
-ALTER ROLE betgenie SET default_transaction_deferrable TO on;
-ALTER ROLE betgenie SET default_transaction_read_only TO off;
-GRANT ALL PRIVILEGES ON DATABASE betgenie_web TO betgenie;
+CREATE DATABASE Emperor Picks_web;
+CREATE USER Emperor Picks WITH PASSWORD 'Emperor Picks123';
+ALTER ROLE Emperor Picks SET client_encoding TO 'utf8';
+ALTER ROLE Emperor Picks SET default_transaction_isolation TO 'read committed';
+ALTER ROLE Emperor Picks SET default_transaction_deferrable TO on;
+ALTER ROLE Emperor Picks SET default_transaction_read_only TO off;
+GRANT ALL PRIVILEGES ON DATABASE Emperor Picks_web TO Emperor Picks;
 ```
 
 ### 4. Environment Variables
@@ -55,7 +55,7 @@ cp .env.example .env.local
 Edit `.env.local` with your settings:
 ```
 # Database
-DATABASE_URL="postgresql://betgenie:betgenie123@localhost:5432/betgenie_web"
+DATABASE_URL="postgresql://Emperor Picks:Emperor Picks123@localhost:5432/Emperor Picks_web"
 
 # Authentication
 NEXTAUTH_SECRET="your-super-secret-key-minimum-32-characters-here!!"
@@ -141,7 +141,7 @@ net start PostgreSQL-x64-14
 sudo service postgresql start
 
 # Or with Docker
-docker start betgenie-db
+docker start Emperor Picks-db
 ```
 
 ### Error: "Database does not exist"
@@ -198,7 +198,7 @@ npx prisma migrate reset
 ## Project Structure
 
 ```
-BetgenieWeb/
+Emperor PicksWeb/
 ├── src/
 │   ├── app/                    # Next.js pages & layouts
 │   │   ├── (auth)/             # Auth pages

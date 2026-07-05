@@ -4,7 +4,7 @@ import SessionProvider from '@/components/SessionProvider';
 import Navbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'Betgenie - Smart Football Predictions',
+  title: 'Emperor Picks - Smart Football Predictions',
   description: 'Smart Football Predictions & Accumulators',
 };
 

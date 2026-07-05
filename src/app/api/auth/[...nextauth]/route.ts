@@ -1,6 +1,6 @@
-import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import CredentialsProvider from "next-auth/providers/credentials"
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 const handler = NextAuth({
   providers: [
@@ -13,34 +13,47 @@ const handler = NextAuth({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error("Please provide email and password")
+          throw new Error("Please provide email and password");
         }
 
         // Test Account
-        if (credentials.email === "test@betgenie.com" && credentials.password === "test123") {
+        if (credentials.email === "test@emperorpicks.com" && credentials.password === "test123") {
           return {
             id: "test-user-001",
             name: "Test User",
-            email: "test@betgenie.com",
+            email: "test@emperorpicks.com",
             image: "https://i.pravatar.cc/150?u=testuser",
-          }
+          };
         }
 
-        throw new Error("Invalid credentials")
-      }
-    })
+        throw new Error("Invalid credentials");
+      },
+    }),
   ],
 
-  pages: {
-    signIn: '/auth/login',
-    error: '/auth/login',        // Show errors on login page
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) token.id = user.id;
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user && token.id) {
+        session.user.id = token.id;
+      }
+      return session;
+    },
   },
 
-  debug: true,                   // ← Enable debug mode
-})
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/login",
+  },
 
-export { handler as GET, handler as POST }
+  debug: true,
+});
+
+export { handler as GET, handler as POST };

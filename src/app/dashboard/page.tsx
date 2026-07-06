@@ -31,15 +31,9 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-[#0A1428] text-white p-6 md:p-8">
       <div className="max-w-5xl mx-auto">
-        <div className="flex justify-between items-center mb-10">
-          <h1 className="text-4xl font-bold">Dashboard</h1>
-          <button
-            onClick={handleLogout}
-            className="bg-red-600/80 hover:bg-red-600 px-6 py-2.5 rounded-xl font-medium transition"
-          >
-            Logout
-          </button>
-        </div>
+        <div className="mb-10">
+  <h1 className="text-4xl font-bold">Dashboard</h1>
+</div>
 
         <div className="bg-gray-900 rounded-3xl p-8 mb-10">
           <div className="flex items-center gap-6">

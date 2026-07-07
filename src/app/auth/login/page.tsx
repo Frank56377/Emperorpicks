@@ -9,59 +9,38 @@ import { signIn } from 'next-auth/react';
 function LoginContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const registered = searchParams.get('registered');
+
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
   const [error, setError] = useState('');
-  const registered = searchParams.get('registered');
+  const [formData, setFormData] = useState({ email: '', password: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError('');
-  setLoading(true);
-
-  const result = await signIn('credentials', {
-    email: formData.email,
-    password: formData.password,
-    redirect: false,
-    callbackUrl: '/dashboard',
-  });
-
-  setLoading(false);
-
-  if (result?.error) {
-    setError('Invalid email or password');
-  } else {
-    router.push('/dashboard');
-  }
-};
-
-  const handleTestLogin = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError('');
     setLoading(true);
 
     const result = await signIn('credentials', {
-      email: 'test@emperorpicks.com',
-      password: 'test123',
+      email: formData.email.trim().toLowerCase(),
+      password: formData.password,
       redirect: false,
-      callbackUrl: '/dashboard',
     });
 
-    setLoading(false);
-
     if (result?.error) {
-      setError('Test login failed. Please check your NextAuth configuration.');
-    } else {
-      router.push('/dashboard');
+      setError('Invalid email or password');
+      setLoading(false);
+      return;
     }
+
+    setLoading(false);
+    router.replace('/admin');
+    router.refresh();
   };
 
   return (
@@ -70,7 +49,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="bg-white/5 backdrop-blur-xl border border-cyan/30 rounded-2xl p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan to-gold bg-clip-text text-transparent mb-2">
-              Emperor Picks
+              Emperor Picks - NEW LOGIN v2
             </h1>
             <p className="text-gray-400">Sign in to your account</p>
           </div>
@@ -80,15 +59,6 @@ const handleSubmit = async (e: React.FormEvent) => {
               Account created successfully! Please sign in.
             </div>
           )}
-
-          <button
-            type="button"
-            onClick={handleTestLogin}
-            disabled={loading}
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl mb-6 transition disabled:opacity-50"
-          >
-            🔧 Login with Test Account (test@emperorpicks.com / test123)
-          </button>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -106,7 +76,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 onChange={handleChange}
                 required
                 className="w-full bg-white/10 border border-cyan/30 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
-                placeholder="you@example.com"
+                placeholder="admin@emperorpicks.com"
               />
             </div>
 
@@ -119,12 +89,12 @@ const handleSubmit = async (e: React.FormEvent) => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full bg-white/10 border border-cyan/30 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
+                  className="w-full bg-white/10 border border-cyan/30 rounded-lg px-4 py-2 pr-10 text-white placeholder-gray-400 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword((v) => !v)}
                   className="absolute right-3 top-2.5 text-gray-400 hover:text-cyan"
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -140,15 +110,6 @@ const handleSubmit = async (e: React.FormEvent) => {
               {loading ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
-
-          <button
-            type="button"
-            onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
-            disabled={loading}
-            className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-4 rounded-xl font-medium hover:bg-gray-100 transition mt-4 disabled:opacity-50"
-          >
-            Continue with Google
-          </button>
 
           <p className="text-center text-gray-400 text-sm mt-6">
             Don&apos;t have an account?{' '}

@@ -1,0 +1,119 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  CANCELED
+}
+
+model User {
+  id                String   @id @default(cuid())
+  name              String?
+  email             String   @unique
+  passwordHash      String?
+  image             String?
+  role              Role     @default(USER)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  subscriptions     UserSubscription[]
+  auditLogs         AuditLog[] @relation("ActorAuditLogs")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  games       Game[]
+}
+
+model Game {
+  id            String   @id @default(cuid())
+  categoryId    String
+  homeTeam      String
+  awayTeam      String
+  league        String?
+  startTime     DateTime
+  oddsHome      Float?
+  oddsDraw      Float?
+  oddsAway      Float?
+  isPublished   Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  predictions   Prediction[]
+
+  @@index([categoryId, startTime])
+}
+
+model Prediction {
+  id            String   @id @default(cuid())
+  gameId        String
+  pick          String
+  confidence    Int?
+  analysis      String?
+  isPremium     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  game          Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+}
+
+model Plan {
+  id                 String   @id @default(cuid())
+  name               String   @unique
+  code               String   @unique
+  priceMonthly       Int
+  priceYearly        Int?
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  userSubscriptions  UserSubscription[]
+}
+
+model UserSubscription {
+  id          String             @id @default(cuid())
+  userId      String
+  planId      String
+  status      SubscriptionStatus @default(ACTIVE)
+  startsAt    DateTime           @default(now())
+  endsAt      DateTime?
+  autoRenew   Boolean            @default(false)
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        Plan @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  @@index([userId, status])
+  @@index([planId, status])
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  action      String
+  entity      String
+  entityId    String?
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  actor       User? @relation("ActorAuditLogs", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([actorUserId, createdAt])
+  @@index([entity, entityId])
+}
